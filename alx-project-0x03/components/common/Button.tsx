@@ -1,18 +1,21 @@
-import { type ButtonProps } from '@/interfaces';
+import { ButtonProps } from "@/interface";
 
-export default function Button({ size, shape, children, onClick }: ButtonProps) {
-  const sizeClasses = {
-    small: 'px-2 py-1 text-sm',
-    medium: 'px-4 py-2',
-    large: 'px-6 py-3 text-lg',
-  };
+const Button = ({ buttonLabel, buttonSize, buttonBackgroundColor, action }: ButtonProps) => {
+  const backgroundColorClass = buttonBackgroundColor ? {
+    red: 'bg-red-500',
+    blue: 'bg-blue-500',
+    orange: 'bg-orange-500',
+    green: 'bg-green-500',
+  }[buttonBackgroundColor] : 'bg-slate-500';
 
   return (
     <button
-      onClick={onClick}
-      className={`${sizeClasses[size]} ${shape} bg-blue-600 text-white hover:bg-blue-700 transition`}
+      onClick={action}
+      className={`${backgroundColorClass} ${buttonSize} px-6 py-2 text-sm font-semibold rounded-lg hover:${backgroundColorClass}/50 transition duration-300 text-white`}
     >
-      {children}
+      {buttonLabel}
     </button>
   );
-}
+};
+
+export default Button;
